@@ -41,7 +41,7 @@ class _MainAppState extends State<MainApp> {
       if (textToDisplay.contains("-")) {
         textToDisplay = textToDisplay.replaceRange(0, 1, "");
       } else {
-        textToDisplay = "-" + textToDisplay;
+        textToDisplay = "-$textToDisplay";
       }
     }
   } else if (btnval == "<") {

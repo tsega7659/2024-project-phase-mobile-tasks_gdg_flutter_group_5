@@ -8,13 +8,13 @@ class Buttons extends StatelessWidget {
   final Function(String)? callback;
 
   const Buttons({
-    Key? key,
+    super.key,
     required this.text,
     required this.fillColor,
     required this.textColor,
     required this.textSize,
     this.callback,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
