@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:form_app/components/signin.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -128,8 +129,7 @@ class _SignupState extends State<Signup> {
                     Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(5),
                       ),
                       child: ElevatedButton(
                         onPressed: () => {},
@@ -161,9 +161,10 @@ class _SignupState extends State<Signup> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          width: 50,
-                          height: 50,
-                          child: Image.asset("assets/images/google-logo.png"),
+                          width: 80,
+                          height: 80,
+                          child:
+                              Image.asset("lib/assets/images/google-logo.png"),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
@@ -173,9 +174,10 @@ class _SignupState extends State<Signup> {
                           width: 20,
                         ),
                         Container(
-                          width: 50,
-                          height: 50,
-                          child: Image.asset("assets/images/facebook-logo.png"),
+                          width: 80,
+                          height: 80,
+                          child: Image.asset(
+                              "lib/assets/images/facebook-logo.png"),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
@@ -189,12 +191,18 @@ class _SignupState extends State<Signup> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Don't have an account?"),
+                        Text("Don't have an account?",
+                            style: TextStyle(fontSize: 20)),
                         TextButton(
-                          onPressed: () => {},
+                          onPressed: () => {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => SignIn()),
+                            )
+                          },
                           child: Text(
                             "Sign Up",
-                            style: TextStyle(color: Colors.blue, fontSize: 15),
+                            style: TextStyle(color: Colors.blue, fontSize: 20),
                           ),
                         ),
                       ],
