@@ -38,12 +38,12 @@ class _FoodPageState extends State<FoodPage> {
             children: [
               Container(
                 margin: EdgeInsets.only(top: 200),
-                width: 200,
-                height: 200,
+                width: 300,
+                height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
                   image: DecorationImage(
-                    image: AssetImage("assets/images/panda.jpg"),
+                    image: AssetImage("assets/images/image_1.jpeg"),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -53,7 +53,7 @@ class _FoodPageState extends State<FoodPage> {
                 "Enjoy Your Food",
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 40,
+                  fontSize: 50,
                   fontWeight: FontWeight.bold,
                 ),
               ),
