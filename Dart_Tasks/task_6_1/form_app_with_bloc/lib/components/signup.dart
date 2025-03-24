@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import "package:form_app_with_bloc/components/bloc_email/email_bloc.dart";
+import "package:form_app_with_bloc/components/bloc_email/email_event.dart";
+import "package:form_app_with_bloc/components/bloc_email/email_state.dart"; // Import EmailState
 import "./bloc_password_visiblity/bloc/password_visiblity_bloc.dart";
 import "./bloc_password_visiblity/bloc/password_visiblity_event.dart";
 import "./bloc_password_visiblity/bloc/password_visiblity_state.dart";
@@ -9,14 +12,20 @@ class Signup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => PasswordVisiblityBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => PasswordVisiblityBloc()),
+        BlocProvider(create: (context) => EmailBloc()), // Provide EmailBloc
+      ],
       child: SignupScreen(),
     );
   }
 }
 
 class SignupScreen extends StatelessWidget {
+  final TextEditingController emailController =
+      TextEditingController(); // Capture Email Input
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,6 +73,7 @@ class SignupScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextField(
+                      controller: emailController, // Store input email
                       decoration: InputDecoration(
                         labelText: "Email",
                         prefixIcon: Icon(Icons.email),
@@ -79,8 +89,7 @@ class SignupScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: TextField(
-                            obscureText:
-                                !state.isPasswordVisible, // Toggle visibility
+                            obscureText: !state.isPasswordVisible,
                             decoration: InputDecoration(
                               labelText: "Password",
                               prefixIcon: Icon(Icons.lock),
@@ -109,7 +118,10 @@ class SignupScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: ElevatedButton(
-                        onPressed: () => {},
+                        onPressed: () {
+                          context.read<EmailBloc>().add(DisplayEmailEvent(
+                              emailController.text)); // Pass email text
+                        },
                         child: Text(
                           "Sign Up",
                           style: TextStyle(
@@ -121,6 +133,20 @@ class SignupScreen extends StatelessWidget {
                             backgroundColor: Colors.blue,
                             padding: EdgeInsets.all(20)),
                       ),
+                    ),
+                    SizedBox(height: 20),
+
+                    /// 🔹 Display the Email Below Sign-Up Button
+                    BlocBuilder<EmailBloc, EmailState>(
+                      builder: (context, state) {
+                        return Text(
+                          "Entered Email: ${state.email}",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        );
+
+                        // return Container(); // If no email, show nothing
+                      },
                     ),
                   ],
                 ),
