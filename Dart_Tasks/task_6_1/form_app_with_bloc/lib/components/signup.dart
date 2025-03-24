@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import "./bloc_password_visiblity/bloc/password_visiblity_bloc.dart";
+import "./bloc_password_visiblity/bloc/password_visiblity_event.dart";
+import "./bloc_password_visiblity/bloc/password_visiblity_state.dart";
 
-class Signup extends StatefulWidget {
+class Signup extends StatelessWidget {
   const Signup({super.key});
 
   @override
-  State<Signup> createState() => _SignupState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => PasswordVisiblityBloc(),
+      child: SignupScreen(),
+    );
+  }
 }
 
-class _SignupState extends State<Signup> {
+class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,13 +38,11 @@ class _SignupState extends State<Signup> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 50,
-            ),
+            SizedBox(height: 50),
             Padding(
               padding: const EdgeInsets.only(left: 30, bottom: 10),
               child: Text(
-                "sign In",
+                "Sign Up",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 35,
@@ -46,7 +53,7 @@ class _SignupState extends State<Signup> {
             Padding(
               padding: const EdgeInsets.only(left: 30, bottom: 10, right: 30),
               child: Text(
-                "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
                 style: TextStyle(color: Colors.grey, fontSize: 15),
               ),
             ),
@@ -56,63 +63,46 @@ class _SignupState extends State<Signup> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Email",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold)),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 232, 226, 226),
-                        borderRadius: BorderRadius.circular(10),
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: "Email",
+                        prefixIcon: Icon(Icons.email),
+                        border: OutlineInputBorder(),
                       ),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          labelText: " enter your email",
-                          border: OutlineInputBorder(
+                    ),
+                    SizedBox(height: 10),
+                    BlocBuilder<PasswordVisiblityBloc, PasswordVisiblityState>(
+                      builder: (context, state) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 232, 226, 226),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          labelStyle: TextStyle(
-                            color: Colors.black,
+                          child: TextField(
+                            obscureText:
+                                !state.isPasswordVisible, // Toggle visibility
+                            decoration: InputDecoration(
+                              labelText: "Password",
+                              prefixIcon: Icon(Icons.lock),
+                              border: OutlineInputBorder(),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  state.isPasswordVisible
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                ),
+                                onPressed: () {
+                                  context
+                                      .read<PasswordVisiblityBloc>()
+                                      .add(TogglePasswordVisiblity());
+                                },
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
+                        );
+                      },
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text("Password",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold)),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 232, 226, 226),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: TextFormField(
-                        // prefixIcon: Icon(Icons.lock),
-                        decoration: InputDecoration(
-                          labelText: " enter your password",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          labelStyle: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 40,
-                    ),
+                    SizedBox(height: 20),
                     Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -121,7 +111,7 @@ class _SignupState extends State<Signup> {
                       child: ElevatedButton(
                         onPressed: () => {},
                         child: Text(
-                          "Sign In",
+                          "Sign Up",
                           style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
