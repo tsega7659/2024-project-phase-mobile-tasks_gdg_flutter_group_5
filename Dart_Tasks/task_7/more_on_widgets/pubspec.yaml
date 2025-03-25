@@ -17,3 +17,15 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - lib/assets/images/man.jpeg
+    - lib/assets/images/woman.png
+    - lib/assets/images/man_2.jpeg
+    - lib/assets/images/woman1.png
+    - lib/assets/images/image_3.png
+    - lib/assets/images/image_31.png
+    - lib/assets/images/image_4.png
+    - lib/assets/images/image_41.png
+    - lib/assets/images/image_last.jpeg
+    
+    
