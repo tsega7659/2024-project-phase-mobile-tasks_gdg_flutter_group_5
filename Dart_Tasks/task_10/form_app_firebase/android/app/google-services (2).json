@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "960817671515",
+    "project_id": "form-app-2776f",
+    "storage_bucket": "form-app-2776f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:960817671515:android:43d2919be6bbe472387e7e",
+        "android_client_info": {
+          "package_name": "com.example.form_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_MahZ8VHBzDzKNqBaBELoDBzB0HqiFGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:960817671515:android:d3b327e52df2ad68387e7e",
+        "android_client_info": {
+          "package_name": "com.example.formapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_MahZ8VHBzDzKNqBaBELoDBzB0HqiFGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
